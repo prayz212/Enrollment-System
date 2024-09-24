@@ -2,7 +2,7 @@ package vidiec.hands_on_practice.enrollment.lab.poc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import vidiec.hands_on_practice.enrollment.lab.poc.commons.enums.Gender;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.UUID;
         name = "student",
         uniqueConstraints = { @UniqueConstraint(name = "student_email_unique", columnNames = "edu_email")}
 )
-@Where(clause = "is_deleted = false")
+@SQLRestriction("is_deleted <> TRUE")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @ToString(callSuper = true)

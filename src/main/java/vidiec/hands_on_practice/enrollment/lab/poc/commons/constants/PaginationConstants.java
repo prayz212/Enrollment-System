@@ -1,7 +1,5 @@
 package vidiec.hands_on_practice.enrollment.lab.poc.commons.constants;
 
-import org.hibernate.query.SortDirection;
-
 public class PaginationConstants {
     public static final String DEFAULT_PAGE_NUMBER = "1";
     public static final String DEFAULT_PAGE_SIZE = "20";

@@ -1,7 +1,6 @@
 package vidiec.hands_on_practice.enrollment.lab.poc.utils;
 
 import org.instancio.Instancio;
-import vidiec.hands_on_practice.enrollment.lab.poc.entities.Enrollment;
 import vidiec.hands_on_practice.enrollment.lab.poc.entities.Student;
 
 import java.util.List;
