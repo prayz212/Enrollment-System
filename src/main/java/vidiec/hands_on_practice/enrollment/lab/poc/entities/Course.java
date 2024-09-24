@@ -2,6 +2,7 @@ package vidiec.hands_on_practice.enrollment.lab.poc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
         name = "course",
         uniqueConstraints = { @UniqueConstraint(name = "course_name_unique", columnNames = "name")}
 )
+@Where(clause = "is_deleted = false")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @ToString(callSuper = true)

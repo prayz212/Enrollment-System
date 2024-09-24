@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import vidiec.hands_on_practice.enrollment.lab.poc.commons.exceptions.InvalidArgumentException;
 import vidiec.hands_on_practice.enrollment.lab.poc.commons.exceptions.NotFoundException;
 
@@ -15,7 +14,7 @@ import vidiec.hands_on_practice.enrollment.lab.poc.commons.exceptions.NotFoundEx
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorMessage> resourceNotFound(NotFoundException exception, WebRequest request) {
+    public ResponseEntity<ErrorMessage> resourceNotFound(NotFoundException exception) {
         log.error(exception.getMessage());
         ErrorMessage message = new ErrorMessage(exception.getMessage());
 
@@ -23,7 +22,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler({InvalidArgumentException.class})
-    public ResponseEntity<ErrorMessage> invalidArgument(InvalidArgumentException exception, WebRequest request) {
+    public ResponseEntity<ErrorMessage> invalidArgument(InvalidArgumentException exception) {
         log.error(exception.getMessage());
         ErrorMessage message = new ErrorMessage(exception.getMessage());
 
