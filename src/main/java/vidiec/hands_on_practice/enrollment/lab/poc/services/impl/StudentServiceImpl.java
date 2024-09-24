@@ -53,11 +53,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Pagination<List<StudentDto>> getAllStudents(int pageNo, int pageSize, String sortBy, String sortDirection) {
-        if (pageSize > PaginationConstants.MAXIMUM_PAGE_SIZE) {
-            throw new InvalidArgumentException("Exceeded maximum page size");
-        }
-
         log.info("Getting students in page: {}, size = {}", pageNo, pageSize);
+
+        if (pageSize < 1 || pageSize > PaginationConstants.MAXIMUM_PAGE_SIZE) {
+            throw new InvalidArgumentException("Invalid page size. Value must be in range 1 to " + PaginationConstants.MAXIMUM_PAGE_SIZE);
+        }
 
         // Default sort column is fullName
         String sortColumn = sortBy.isEmpty() ? "fullName" : sortBy;
@@ -72,8 +72,8 @@ public class StudentServiceImpl implements StudentService {
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         Page<Student> studentPages = studentRepository.findAll(pageable);
-        if (pageNo > pageSize)
-            throw new InvalidArgumentException("Exceeded maximum page number");
+        if (pageNo < 1 || pageNo > studentPages.getTotalPages())
+            throw new InvalidArgumentException("Invalid page number. Value must be in range 1 to " + studentPages.getTotalPages());
 
         List<StudentDto> students = studentPages
                 .getContent()
@@ -113,7 +113,7 @@ public class StudentServiceImpl implements StudentService {
         if (!violations.isEmpty())
             throw new InvalidArgumentException(violations);
 
-        log.info("Updating student: {}", requestDto);
+        log.info("Updating student with id: {}", studentId);
         Optional<Student> studentOpt = studentRepository.findById(studentId);
 
         if (studentOpt.isEmpty())

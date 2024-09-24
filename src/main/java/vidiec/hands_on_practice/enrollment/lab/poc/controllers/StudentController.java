@@ -3,7 +3,6 @@ package vidiec.hands_on_practice.enrollment.lab.poc.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import vidiec.hands_on_practice.enrollment.lab.poc.commons.constants.PaginationConstants;
 import vidiec.hands_on_practice.enrollment.lab.poc.dto.Pagination;
 import vidiec.hands_on_practice.enrollment.lab.poc.dto.StudentRequestDto;
